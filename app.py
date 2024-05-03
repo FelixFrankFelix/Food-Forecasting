@@ -4,6 +4,7 @@ import xgboost as xgb
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from datetime import datetime, timedelta
+from sklearn.linear_model import LinearRegression
 
 # Load data
 fpn = pd.read_csv('raw_data.csv')  # Load your data here
@@ -25,8 +26,9 @@ def create_features(df):
 def train_model(df):
     X = df[FEATURES]
     y = df[TARGET]
-    reg = xgb.XGBRegressor(booster='gbtree')
-    reg.fit(X, y, verbose=100)
+    reg = LinearRegression()
+    #reg = xgb.XGBRegressor(booster='gbtree')
+    reg.fit(X, y)#, verbose=100)
     return reg
 
 # Define Streamlit app
@@ -67,7 +69,9 @@ predictions = []
 
 for date in predict_dates:
     features = create_features(pd.DataFrame({'date': [date]}))
-    prediction = model.predict(features[FEATURES])[0]
+    prediction = model.predict(features[FEATURES])
+    print(prediction)
+    prediction = prediction[0]
     predictions.append((date, prediction))
 
 # Display predictions
