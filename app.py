@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import xgboost as xgb
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from datetime import datetime, timedelta
@@ -69,9 +68,7 @@ predictions = []
 
 for date in predict_dates:
     features = create_features(pd.DataFrame({'date': [date]}))
-    prediction = model.predict(features[FEATURES])
-    print(prediction)
-    prediction = prediction[0]
+    prediction = model.predict(features[FEATURES])[0]
     predictions.append((date, prediction))
 
 # Display predictions

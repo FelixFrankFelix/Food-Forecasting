@@ -1,2 +1,0 @@
-name = {'Emeka','Daniel', 'Frank','David'}
-print(name.pop())
