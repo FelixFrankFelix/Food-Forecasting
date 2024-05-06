@@ -68,6 +68,9 @@ def plot_prices(actual, predicted):
 def main():
     st.title('Food Price Prediction App')
     commodity_list = fpn['commodity'].unique().tolist()
+    #print(commodity_list)
+    commodity_list.remove('Fuel (diesel)')
+    commodity_list.remove('Fuel (petrol-gasoline)')
     selected_commodity = st.selectbox('Select Commodity:', commodity_list)
     # Filter data for selected commodity
     data = fpn[fpn['commodity'] == selected_commodity][["date", "price"]]
